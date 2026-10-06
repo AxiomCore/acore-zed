@@ -1,9 +1,10 @@
 # Publication gates
 
-The adapter is Apache-2.0 by owner choice. The working manifest's public
-URLs are populated in the clean source export, and no public native download
-is enabled until redistribution is approved. Z6 provides a verified installer and clean one-commit source exports. Public
-activation/promotion remains a reviewed release action. See
+The adapter is Apache-2.0 by owner choice. The reviewed adapter/grammar
+source is public. The owner subsequently approved the Mac native ZIP at
+[Acore LSP 0.1.0](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.0).
+The Z6 automatic installer remains disabled in adapter v0.1.0; use the public
+ZIP with explicit path/PATH selection. See
 [distribution preparation](DISTRIBUTION.md).
 
 Prepare a clean adapter repository containing only Rust adapter/settings
@@ -14,11 +15,11 @@ its separate clean repository. Review both contents and Git history. Exclude
 credentials and private fixtures. The existing `acore-vscode` validation
 history must remain private.
 
-The owner selected Apache-2.0 for the adapter. The owner selected private native binary delivery for the initial release.
-Supply authorized developers a compatible executable, trusted digest and separate
-terms/notices. Public native redistribution remains a separate future approval
-and notice/signing review; any approved public assets need their own immutable
-release manifest. The extension
+The adapter/grammar Apache-2.0 license is separate from the proprietary native
+compiler. The public Mac ZIP supplies the accepted executable, trusted digests,
+compatibility manifest, native notice and conservative dependency notice
+inventory. Native implementation source remains private. Signing/notarization
+and recipient-machine Gatekeeper acceptance remain pending. The extension
 must locate/download the server; it must not bundle an executable. The release candidate records
 binary licensing/dependency metadata and signing status. Digest-bound platform
 selection, cache recovery and offline reuse are implemented; licensing/notices,
@@ -29,8 +30,9 @@ public native binaries are also inspectable.
 
 The reviewed adapter and grammar v0.1.0 source releases are public. Their HTTPS
 URLs and grammar revision are pinned, and the exact tagged adapter has passed
-macOS dev installation. No native executable was uploaded. Prepare registry
-submission using the tested public revision and private-server instructions.
+macOS dev installation. The later standalone Mac native release is available
+separately. Prepare registry submission using the tested public revision and
+current ZIP/path installation instructions.
 Recheck that extension ID `acore` is available. Fork `zed-industries/extensions`,
 add the adapter as an HTTPS submodule at `extensions/acore`, add the matching
 version in `extensions.toml`, run `pnpm sort-extensions`, and prepare the

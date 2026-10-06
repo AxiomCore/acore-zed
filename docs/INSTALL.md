@@ -1,10 +1,11 @@
 # Install Acore for Zed
 
 The Apache-2.0 adapter and grammar can be installed from their reviewed source
-release. A compatible native server is supplied separately by the maintainer;
-public automatic native downloads and registry installation remain pending.
-The verified installer is implemented, with its active release disabled until
-native redistribution is approved.
+release. Download the compatible Mac native server from
+[Acore LSP 0.1.0](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.0).
+Registry installation and automatic native downloading remain pending. The
+ZIP is used through explicit path/PATH selection; the adapter
+`releases/server.json` still has `activeRelease: null`.
 
 ## From Git
 
@@ -59,7 +60,27 @@ during acceptance because other user windows were open.
 
 ## Select the native server
 
-Inspect the supplied binary before configuring it:
+For Apple Silicon macOS, download all three release assets into an empty
+folder and check the ZIP and metadata before extracting:
+
+```sh
+mkdir acore-lsp-0.1.0
+cd acore-lsp-0.1.0
+curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.0/acore-lsp-macos-arm64.zip
+curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.0/acore-lsp-release.json
+curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.0/SHA256SUMS
+shasum -a 256 -c SHA256SUMS
+unzip acore-lsp-macos-arm64.zip
+./acore-lsp --version-json
+```
+
+The accepted native SHA256 is
+`1b668d5e0a2fcb94ee24e7aef1c575b876125e92253760c1f8d6838287a35847`.
+Native distribution terms and dependency notices are in the ZIP. Signing,
+notarization and recipient-machine Gatekeeper acceptance remain pending.
+No security bypass is part of these installation steps.
+
+Inspect the extracted binary before configuring it:
 
 ```sh
 /absolute/path/to/acore-lsp --version-json

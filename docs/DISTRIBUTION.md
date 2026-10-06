@@ -1,7 +1,9 @@
 # Verified server installation and recovery
 
 The Z6 installer is implemented and locally accepted on macOS ARM64. The owner
-selected public Apache-2.0 adapter/grammar source and private native delivery.
+subsequently approved public Mac native ZIP delivery at
+[AxiomCore/AxiomCore](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.0),
+separate from the Apache-2.0 adapter/grammar source.
 Registry installation remains pending human submission and maintainer merge.
 `releases/server.json` deliberately has `activeRelease: null` in this release. With no explicit path or worktree PATH server, it reports that no approved
 download release is enabled. Use a supplied verified server as documented in
@@ -71,7 +73,14 @@ a matching CLI; see [foreign workflows](FOREIGN_WORKFLOWS.md).
 
 ## Maintainer release preparation
 
-From the adapter checkout, package the final reviewed standalone Mac executable:
+The release dashboard has a standalone **Acore LSP** component that builds and
+publishes the ZIP, compatibility metadata and checksums under `acore-lsp-vX.Y.Z`
+in `AxiomCore/AxiomCore`. It verifies remote asset bytes and preserves the
+repository's global Latest selection. This public ZIP is a manual path/PATH
+distribution; it is not a raw-executable pin for the Z6 automatic installer.
+
+For a future reviewed automatic-download release, the adapter helper can
+prepare a raw native asset and compiled pins from the final executable:
 
 ```sh
 python3 scripts/package-server.py --binary /path/to/acore-lsp \
@@ -111,7 +120,9 @@ Private source, binary, CLI, internal evidence, captured archives and historical
 validation Git objects are excluded from the exports. A pattern/allowlist audit
 helps disclosure review; it does not make the inspectable native binary opaque.
 macOS ARM64 dev-extension acceptance and performance recording are complete.
-Public native asset promotion, native dependency review, recipient-machine
-Gatekeeper acceptance and notarization remain separate deferred gates. No public
-native asset is uploaded under the current private delivery choice. Linux, Windows,
-physical Intel macOS and SSH/remote execution are pending.
+The public Mac ZIP preserves the exact accepted Z6/Z7 executable and includes
+a conservative 311-package normal/build notice inventory. This is not an exact
+linked SBOM or legal clearance claim. Native implementation source remains
+private. Recipient-machine Gatekeeper acceptance, notarization, automatic
+native download activation, Linux, Windows, physical Intel macOS and SSH/remote
+execution remain pending.
