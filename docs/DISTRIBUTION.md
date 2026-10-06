@@ -1,9 +1,9 @@
 # Verified server installation and recovery
 
-The Z6 installer is implemented and locally accepted on macOS ARM64. Public
-native assets and registry installation remain pending promotion.
-`releases/server.json` deliberately has `activeRelease: null` in this private
-alpha. With no explicit path or worktree PATH server, it reports that no approved
+The Z6 installer is implemented and locally accepted on macOS ARM64. The owner
+selected public Apache-2.0 adapter/grammar source and private native delivery.
+Registry installation remains pending human submission and maintainer merge.
+`releases/server.json` deliberately has `activeRelease: null` in this release. With no explicit path or worktree PATH server, it reports that no approved
 download release is enabled. Use a supplied verified server as documented in
 [INSTALL.md](INSTALL.md). No GitHub token or private repository access is part
 of the installer. The CLI remains separate and optional.
@@ -61,7 +61,7 @@ a matching CLI; see [foreign workflows](FOREIGN_WORKFLOWS.md).
 
 | Failure | Recovery |
 | --- | --- |
-| No approved release enabled | Supply a verified standalone path/PATH server; wait for public promotion. |
+| No approved release enabled | Supply the separately delivered verified standalone path/PATH server. |
 | No approved asset for the host | Supply a compatible reviewed binary. macOS ARM64 is accepted; other hosts remain pending. |
 | Missing asset / network unavailable | Retry the exact release after connectivity is restored, or use a verified offline override/cache. |
 | Download size/SHA-256 mismatch | Do not run the partial/corrupt file. Retry the pinned release; ask the maintainer to repair the distribution without changing the pin silently. |
@@ -100,15 +100,18 @@ python3 scripts/check-public.py .local/public-candidate
 
 These have one clean root commit each and no remote. Proposed HTTPS URLs are
 written into the candidate only; the grammar pin refers to the exported grammar
-commit. The adapter retains its private draft license unless the owner supplies
-an approved MIT/Apache-2.0 file via `--adapter-license`. A proposed MIT text is in
-[LICENSE.proposed-MIT](../LICENSE) for review; that proposal
-does not relicense this alpha or the native server. See [publication gates](PUBLISHING.md).
+commit. The adapter uses the owner's approved Apache-2.0 LICENSE; the grammar retains
+its Apache-2.0 license and upstream notices. The helper preserves these license
+files, or accepts an explicitly approved replacement via `--adapter-license`.
+Adapter licensing does not license the native server. See [publication
+gates](PUBLISHING.md).
 
 Public source checks need no compiler/runtime checkout or private GitHub access.
 Private source, binary, CLI, internal evidence, captured archives and historical
 validation Git objects are excluded from the exports. A pattern/allowlist audit
 helps disclosure review; it does not make the inspectable native binary opaque.
-Public asset promotion, real Internet/clean-machine installation, notarization
-and final release/performance acceptance remain explicit gates. Linux, Windows,
+macOS ARM64 dev-extension acceptance and performance recording are complete.
+Public native asset promotion, native dependency review, recipient-machine
+Gatekeeper acceptance and notarization remain separate deferred gates. No public
+native asset is uploaded under the current private delivery choice. Linux, Windows,
 physical Intel macOS and SSH/remote execution are pending.

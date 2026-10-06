@@ -14,9 +14,11 @@ its separate clean repository. Review both contents and Git history. Exclude
 credentials and private fixtures. The existing `acore-vscode` validation
 history must remain private.
 
-The owner selected Apache-2.0 for the adapter. Native binary redistribution
-remains a separate approval and notice/signing review. Distribute immutable native assets
-separately, with their own terms and a pinned release manifest. The extension
+The owner selected Apache-2.0 for the adapter. The owner selected private native binary delivery for the initial release.
+Supply authorized developers a compatible executable, trusted digest and separate
+terms/notices. Public native redistribution remains a separate future approval
+and notice/signing review; any approved public assets need their own immutable
+release manifest. The extension
 must locate/download the server; it must not bundle an executable. The release candidate records
 binary licensing/dependency metadata and signing status. Digest-bound platform
 selection, cache recovery and offline reuse are implemented; licensing/notices,
@@ -25,8 +27,10 @@ public native binaries are also inspectable.
 [Publishing prerequisites](https://zed.dev/docs/extensions/publishing/prerequisites),
 [license requirements](https://zed.dev/docs/extensions/publishing/license-requirements).
 
-After Z6–Z7 pass and the public candidate is approved, publish the approved
-repositories/assets, set the real HTTPS URLs and pin the tested revisions.
+The reviewed adapter and grammar v0.1.0 source releases are public. Their HTTPS
+URLs and grammar revision are pinned, and the exact tagged adapter has passed
+macOS dev installation. No native executable was uploaded. Prepare registry
+submission using the tested public revision and private-server instructions.
 Recheck that extension ID `acore` is available. Fork `zed-industries/extensions`,
 add the adapter as an HTTPS submodule at `extensions/acore`, add the matching
 version in `extensions.toml`, run `pnpm sort-extensions`, and prepare the
@@ -40,8 +44,8 @@ under the owner's earlier instruction.
 
 The prepared `.github/workflows/public-checks.yml` builds only the adapter/WASI
 component, task checks and publicly pinned grammar. It never checks out native
-compiler/runtime repositories or uploads captured source. It is prepared for
-future execution; local macOS results do not certify a Linux Zed client.
+compiler/runtime repositories or uploads captured source. The initial public-source run passed; a runner build does not certify a Linux
+Zed desktop client. Local macOS acceptance remains a separate recorded result.
 
 ## Human registry submission
 

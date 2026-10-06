@@ -8,7 +8,7 @@ reviewed source archives and a separately supplied compatible server. Follow
 independent of an Apache-2.0 adapter checkout. Never share the private compiler
 capture repository/history as an extension package.
 
-After the public repositories exist, developers can clone their reviewed tags,
+The public repositories now exist; developers can clone their reviewed tags,
 or use Zed's **Extensions** page after the registry submission is merged and
 packaged. Search for **Acore** and install it. No VSIX upload is used.
 An installed dev extension overrides the registry package; remove that override
@@ -22,6 +22,11 @@ maintainer and configure its path. A public adapter does not by itself publish
 or license the compiler. See [DISTRIBUTION.md](DISTRIBUTION.md).
 
 ## Release an adapter or grammar update
+
+Work from a clone of the public repository and preserve its history. Do not push
+the private validation workspace or regenerate a fresh public root for updates.
+Copy only reviewed source changes when development happens in that workspace.
+
 
 1. Make the change in its owning layer; see [ARCHITECTURE.md](ARCHITECTURE.md).
    For grammar changes, commit the generated parser, pass corpus/query tests,
@@ -46,7 +51,9 @@ or license the compiler. See [DISTRIBUTION.md](DISTRIBUTION.md).
    git diff --cached --stat
    ```
 
-6. Open an update PR, respond to review, and repeat clean registry installation
+6. A human maintainer must write and submit the update PR and review responses
+   in their own words under the registry [AI policy](https://github.com/zed-industries/extensions/blob/main/AI_POLICY.md).
+   Repeat clean registry installation
    after maintainers merge/package it. Developers then update through Zed's
    Extensions UI according to their update settings.
 [Zed update process](https://zed.dev/docs/extensions/publishing/updating-and-maintenance).
@@ -59,12 +66,19 @@ native compiler repositories.
 
 ## Release a native compiler/server update
 
-Build and test privately. Review all platform identities, metadata, dependency
-notices, redistribution terms and macOS signing/notarization status. If signing
-changes bytes, repackage and rerun checks against the signed artifact.
+The initial distribution keeps the native server private by owner choice. Build
+and test privately, then supply authorized developers a versioned binary, its
+trusted SHA-256, compatibility metadata and separate terms/notices. Supply a
+matching optional CLI when its compiler fingerprint changes. Developers select
+the new executable through `lsp.acore-lsp.binary.path` and restart the server.
+Keep `releases/server.json` disabled; a private server update does not require
+a registry update unless the adapter/compatibility contract also changes.
 
-Publish new immutable assets in the assets-only distribution repository after
-review. Download them anonymously and compare exact size/SHA-256/metadata.
+Public automatic native downloads are a separate future decision. Before that
+route, review platform identities, dependency notices, redistribution terms and
+macOS signing/notarization. If signing changes bytes, repackage and rerun checks
+against the final artifact. Publish new immutable assets in an assets-only
+distribution repository after review. Download them anonymously and compare exact size/SHA-256/metadata.
 Update the adapter's compiled `releases/server.json` with that new release ID,
 platforms, URLs and digests, increase the adapter version, and follow the
 registry update process above. A server asset upload alone does not change the
