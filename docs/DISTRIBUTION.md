@@ -2,7 +2,7 @@
 
 The Z6 installer is implemented and locally accepted on macOS ARM64. The owner
 subsequently approved public Mac native ZIP delivery at
-[AxiomCore/AxiomCore](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.0),
+[AxiomCore/AxiomCore](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.1),
 separate from the Apache-2.0 adapter/grammar source.
 Registry installation remains pending human submission and maintainer merge.
 `releases/server.json` deliberately has `activeRelease: null` in this release. With no explicit path or worktree PATH server, it reports that no approved
@@ -120,7 +120,7 @@ Private source, binary, CLI, internal evidence, captured archives and historical
 validation Git objects are excluded from the exports. A pattern/allowlist audit
 helps disclosure review; it does not make the inspectable native binary opaque.
 macOS ARM64 dev-extension acceptance and performance recording are complete.
-The public Mac ZIP preserves the exact accepted Z6/Z7 executable and includes
+The public Mac ZIP preserves the exact accepted L1–L9 executable and includes
 a conservative 311-package normal/build notice inventory. This is not an exact
 linked SBOM or legal clearance claim. Native implementation source remains
 private. Recipient-machine Gatekeeper acceptance, notarization, automatic

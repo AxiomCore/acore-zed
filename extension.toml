@@ -1,6 +1,6 @@
 id = "acore"
 name = "Acore"
-version = "0.1.1"
+version = "0.1.3"
 schema_version = 1
 authors = ["AxiomCore contributors"]
 description = "Compiler-backed Acore configuration, backend, frontend and database authoring"
@@ -16,11 +16,13 @@ args = ["--version-json"]
 
 [grammars.acore]
 repository = "https://github.com/AxiomCore/tree-sitter-acore"
-rev = "243f703d3d5b37cf6b1e279aa50a55683e597e45"
+rev = "39bfab9ded526cf141bfdc18416c92cd2bcfca1f"
 
 [language_servers.acore-lsp]
 name = "Acore Language Server"
-languages = ["Acore"]
+languages = ["Acore", "TOML", "JSON"]
 
 [language_servers.acore-lsp.language_ids]
 "Acore" = "acore"
+"TOML" = "toml"
+"JSON" = "json"

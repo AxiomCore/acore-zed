@@ -1,0 +1,35 @@
+[
+  {
+    "label": "Acore: run reviewed CLI workflow (save all)",
+    "command": "\"$ACORE_PYTHON\"",
+    "args": [
+      "\"$ACORE_WORKFLOW_RUNNER\"",
+      "--root",
+      "\"$ACORE_PROJECT_ROOT\"",
+      "--cli",
+      "\"$ACORE_CLI\"",
+      "--definition",
+      "\"$ACORE_WORKFLOW_FILE\"",
+      "--trusted-workspace"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "reveal": "always",
+    "hide": "never",
+    "show_summary": true,
+    "show_command": true,
+    "env": {
+      "ACORE_PYTHON": "python3",
+      "ACORE_WORKFLOW_RUNNER": "$ZED_WORKTREE_ROOT/.zed/run-workflow.py",
+      "ACORE_PROJECT_ROOT": "$ZED_WORKTREE_ROOT",
+      "ACORE_CLI": "axiom",
+      "ACORE_WORKFLOW_FILE": "$ZED_WORKTREE_ROOT/.zed/acore-workflow.json",
+      "ACORE_LSP": "acore-lsp"
+    },
+    "shell": {
+      "program": "/bin/sh"
+    }
+  }
+]

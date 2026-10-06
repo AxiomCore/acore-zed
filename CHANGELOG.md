@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.1.3 — L1–L9 delivery
+
+Attach the shared native LSP to recognized private JSON inputs alongside Acore
+and TOML. Add field/reference completion, hover, diagnostics and offline report
+inspection for 40 private artifact roles. Extend database, managed backend and
+frontend graph relationships with exact D10 persistence and contract identities.
+
+Add a typed explicit CLI workflow runner and save-all task template using the
+current CLI catalogue. Validate owning paths, matching native/CLI identity and
+saved input revisions; cancel the owned process group. Application suites report
+real assertions separately from compiler smoke. Use the separately distributed Acore LSP 0.1.1 Mac ARM64 ZIP and new reachable
+grammar revision. Native implementation source stays private. Additional OS,
+registry, signing/notarization and hosted Actions acceptance remain pending.
+
+## 0.1.2 — local L1–L6 candidate
+
+Shared compiler-backed hover documentation, contextual completion, manifest
+editing, typed form/store/workflow bindings, safe semantic refactors and updated
+syntax/starters. Apple Silicon macOS acceptance is recorded in the workspace's
+L1–L6 validation record; public immutable promotion remains separate.
+
 ## 0.1.1
 
 Reject unknown language-server IDs before reading worktree settings or launching

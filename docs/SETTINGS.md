@@ -51,8 +51,9 @@ owners; omit them when defaults select the correct entry. Other existing
 native settings include `configurationFiles` and the `projects` map keyed by
 project root URI. `configurationFiles` maps patterns to manifest kinds such as
 `"deps"` or `"extension-workflow"`, rather than encoding names such as `"toml"`.
-They refine server ownership/analysis and do not attach the server to an
-additional Zed language. Initialization options must be an object.
+They refine server ownership/analysis. The adapter already registers Acore and
+TOML; associations select recognized inputs within that registration, rather
+than creating a replacement language. Initialization options must be an object.
 
 `lsp.acore-lsp.settings` supplies live overrides through
 `workspace/didChangeConfiguration`. The adapter starts with the initialization
@@ -89,10 +90,14 @@ RPCs remain disabled; invoke the CLI explicitly for those workflows. Setting
 that flag to true produces an actionable startup error. Zed Restricted Mode
 continues to govern whether the project server and version query can run.
 
-Only `.acore` receives the Acore language registration. Z4 confirms TOML,
-YAML, JSON and Pkl coexistence. Typed manifest attachment remains unavailable;
-keep those files in their usual languages. Saved recognized manifests update
-Acore owners, while unsaved manifest edits are not Acore overlays. See
-[E7/configuration compatibility](E7_CONFIGURATION.md) for the tested limits. Semantic tokens supplement Tree-sitter colors
-when `combined` is enabled. [Zed language settings](https://zed.dev/docs/configuring-languages),
+Adapter 0.1.3 registers the native server for Acore, existing TOML and JSON. Keep
+`AxiomDeps.toml` in TOML: recognized manifests receive Axiom completion/hover and
+unsaved overlays, while ordinary TOML receives no Axiom authoring services.
+Existing TOML language servers may remain enabled through Zed's normal per-language
+selection. Recognized private JSON inputs also receive native assistance; ordinary
+JSON receives no Acore authoring response and retains its normal provider. YAML/Pkl
+keep their existing providers. See [private JSON/workflows](WORKFLOWS.md).
+See [L1–L6 authoring](AUTHORING.md) for explicit evolution selections and the
+thirteen starters. Semantic tokens supplement Tree-sitter colors when `combined`
+is enabled. [Zed language settings](https://zed.dev/docs/configuring-languages),
 [semantic highlighting](https://zed.dev/docs/extensions/languages).

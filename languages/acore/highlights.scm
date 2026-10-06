@@ -210,3 +210,54 @@
   "also"
 ] @keyword
 "=>" @operator
+
+; Current database and application forms (syntax context, not reserved words).
+[  "aggregate"
+  "array"
+  "async"
+  "collation"
+  "composite"
+  "denied"
+  "domain"
+  "emit"
+  "evolution"
+  "field"
+  "foreignServer"
+  "foreignTable"
+  "form_model"
+  "go"
+  "grant"
+  "layout"
+  "materializedView"
+  "migration"
+  "not_found"
+  "optimistic"
+  "options"
+  "partition"
+  "path"
+  "procedure"
+  "range"
+  "redirect"
+  "referenceData"
+  "replace"
+  "role"
+  "rowSecurity"
+  "rule"
+  "sequence"
+  "server"
+  "session"
+  "signed_out"
+  "store"
+  "trigger"
+  "update"
+  "userMapping"] @keyword
+(namedRouteDeclaration name: (identifier) @type)
+(routeParameter name: (identifier) @variable.parameter)
+(migrationDeclaration version: (intLiteralExpr) @number)
+(workflowStatement command: (qualifiedIdentifier) @function)
+((domainCall (qualifiedIdentifier) @keyword) (#match? @keyword "^(Exponential|Field|Fixed|Linear|adoptName|auth|backend|backfill|body|cache|cacheIdentity|cast|concurrently|convert|cors|defaultPrivileges|defaults|errors|eventTrigger|frontend|group|header|idempotency|intercept|invalidates|manage|managed|membership|mock|native|observability|offlineConfig|partitioning|policies|primaryKey|project|rateLimit|record|rename|request|response|responseCookie|responseHeader|result|retry|return_to|rowPolicy|sandbox|security|securityEvidence|serverDefaults|serverTelemetry|session_actions|stream|streaming|tableStorage|testConfig)$"))
+
+; Nested catalog calls retain contextual colors when semantic tokens are off.
+((unqualifiedAccessExpr (identifier) @keyword (argumentList)) (#match? @keyword "^(Exponential|Field|Fixed|Linear|adoptName|auth|backend|backfill|body|cache|cacheIdentity|cast|concurrently|convert|cors|defaultPrivileges|defaults|errors|eventTrigger|frontend|group|header|idempotency|intercept|invalidates|manage|managed|membership|mock|native|observability|offlineConfig|partitioning|policies|primaryKey|project|rateLimit|record|rename|request|response|responseCookie|responseHeader|result|retry|return_to|rowPolicy|sandbox|security|securityEvidence|serverDefaults|serverTelemetry|session_actions|stream|streaming|tableStorage|testConfig)$"))
+((constructorExpr (qualifiedIdentifier) @keyword) (#match? @keyword "^(Exponential|Field|Fixed|Linear|adoptName|auth|backend|backfill|body|cache|cacheIdentity|cast|concurrently|convert|cors|defaultPrivileges|defaults|errors|eventTrigger|frontend|group|header|idempotency|intercept|invalidates|manage|managed|membership|mock|native|observability|offlineConfig|partitioning|policies|primaryKey|project|rateLimit|record|rename|request|response|responseCookie|responseHeader|result|retry|return_to|rowPolicy|sandbox|security|securityEvidence|serverDefaults|serverTelemetry|session_actions|stream|streaming|tableStorage|testConfig)$"))
+((constrainedType (declaredType (qualifiedIdentifier) @keyword)) (#match? @keyword "^(Exponential|Field|Fixed|Linear|adoptName|auth|backend|backfill|body|cache|cacheIdentity|cast|concurrently|convert|cors|defaultPrivileges|defaults|errors|eventTrigger|frontend|group|header|idempotency|intercept|invalidates|manage|managed|membership|mock|native|observability|offlineConfig|partitioning|policies|primaryKey|project|rateLimit|record|rename|request|response|responseCookie|responseHeader|result|retry|return_to|rowPolicy|sandbox|security|securityEvidence|serverDefaults|serverTelemetry|session_actions|stream|streaming|tableStorage|testConfig)$"))

@@ -60,7 +60,10 @@ runtime, network dependency resolver, extractor or database is invoked.
 4. In backend, hover/navigate the model; in frontend, complete `increment` at
    `on_press`; in database, complete `DatabaseEngine` members and inspect the
    `title` declaration. No database connection should be needed.
-5. Follow [TYPED_EDITING.md](TYPED_EDITING.md) for signatures, references,
+5. Follow [AUTHORING.md](AUTHORING.md) to verify manifest hover/completion with
+   TOML identity, unsaved Audience changes and legal bracket-name insertion,
+   SQLite signatures, selected evolution diagnostics and current syntax with
+   semantic tokens enabled/disabled. Follow [TYPED_EDITING.md](TYPED_EDITING.md) for signatures, references,
    workspace symbols, validated symbol rename, quick fixes, formatting and
    Unicode/CRLF. Follow [E7_CONFIGURATION.md](E7_CONFIGURATION.md) for hints,
    manifest coexistence and the configuration file-rename limitation.
@@ -74,8 +77,7 @@ runtime, network dependency resolver, extractor or database is invoked.
 Keep test changes in disposable projects. Review returned multi-file edits
 before saving. A rejected configuration file refactor does not stop Zed moving
 the file; repair errors first and review imports afterward. Type hierarchy,
-typed manifest buffers, virtual documents and graph panels have no supported
-Zed surface; see [FEATURES.md](FEATURES.md).
+virtual documents and graph panels have no supported Zed surface; see [FEATURES.md](FEATURES.md).
 
 Use **zed: open log** for startup failures. A dev rebuild can reload other
 worktrees' Acore servers; confirm they reconnect. Rebuilding can duplicate snippet

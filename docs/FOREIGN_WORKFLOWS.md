@@ -109,4 +109,4 @@ reports that workspace limitation; no Rust compilation acceptance is claimed.
 
 See [CLI tasks and saved inputs](CLI.md), [settings and trust](SETTINGS.md) and
 [feature limits](FEATURES.md). Acceptance is macOS ARM64 only. Other operating
-systems and public distribution remain later release gates.
+systems and registry installation remain later release gates; the Mac native 0.1.1 ZIP is public.

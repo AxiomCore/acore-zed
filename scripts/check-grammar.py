@@ -13,9 +13,14 @@ parser.add_argument('--grammar', type=Path, default=root.parent / 'tree-sitter-a
 parser.add_argument('--examples', type=Path, help='Optional additional .acore corpus directory')
 args = parser.parse_args()
 grammar = args.grammar.resolve()
+rebuilt = False
 
 def parse_source(path, edits=()):
+    global rebuilt
     command = ['tree-sitter', 'parse', '--no-ranges', str(path)]
+    if not rebuilt:
+        command.append('--rebuild')
+        rebuilt = True
     if edits:
         command.extend(['--edits', *edits])
     result = subprocess.run(command, cwd=grammar,
@@ -51,7 +56,7 @@ profile_names = [('Settings', 'enabled', 'label', 'settings', 'transform'),
 profile_keywords = [('class',), ('profile', 'model', 'endpoint'),
                     ('module', 'app', 'route', 'page', 'state', 'action', 'view'),
                     ('module', 'database', 'schema', 'table')]
-assert len(snippets) == len(required) == len(profile_names) == len(profile_keywords) == 4
+assert len(snippets) >= 13 and len(required) == len(profile_names) == len(profile_keywords) == 4
 with tempfile.TemporaryDirectory(prefix='acore-grammar-') as directory:
     temporary = Path(directory)
     for (name, snippet), nodes, names, keywords in zip(
@@ -68,6 +73,21 @@ with tempfile.TemporaryDirectory(prefix='acore-grammar-') as directory:
         checks.append(f'{name}: outline captures')
         assert_captures('highlights.scm', path, [('keyword', value) for value in keywords])
         checks.append(f'{name}: keyword highlights')
+    for name, snippet in list(snippets.items())[4:]:
+        source = '\n'.join(snippet['body']) + '\n'
+        source = re.sub(r'\$\{\d+:([^}]+)\}', r'\1', source)
+        source = re.sub(r'\$\d+', '', source)
+        path = temporary / (snippet['prefix'] + '.acore')
+        path.write_text(source)
+        assert_parsed(path, name)
+        for query in ['highlights.scm', 'outline.scm', 'textobjects.scm']:
+            query_captures(root / 'languages/acore' / query, path)
+        checks.append(f'{name}: parse and queries')
+    path = temporary / 'database-contextual-column.acore'
+    path.write_text('table Account { sequence: Pg.Int64(default: 9223372036854775807) }\n')
+    assert_parsed(path)
+    assert_captures('highlights.scm', path, [('property', 'sequence')])
+    checks.append('Database contextual sequence column')
     path = temporary / 'unicode-crlf.acore'
     path.write_bytes('class Unicode { label: String = "Hello é😀" }\r\nvalue = Unicode { }\r\n'.encode())
     assert parse_source(path)[0] == 0
@@ -108,6 +128,16 @@ with tempfile.TemporaryDirectory(prefix='acore-grammar-') as directory:
     assert_captures('highlights.scm', path, [('comment', '/// Structure'),
                     ('property', 'enabled'), ('constant', 'true'), ('number', '1')])
     checks.append('Literal, property and comment highlights')
+    path = temporary / 'nested-catalog.acore'
+    path.write_text('model Task { title: Field(type: String) }\n'
+                    'endpoint get(method: GET,path: "/") { response(type: String) }\n'
+                    'backfill = 1\nlabel = "Field(type: String)"\n')
+    assert_parsed(path)
+    assert_captures('highlights.scm', path, [('keyword', 'Field'), ('keyword', 'response')])
+    captures = query_captures(root / 'languages/acore/highlights.scm', path)
+    assert ('keyword', 'backfill') not in captures, 'contextual forms must not reserve ordinary binding names'
+    checks.append('Nested catalog calls and ordinary binding/string exclusions')
+    path = temporary / 'structure.acore'
     assert_captures('textobjects.scm', path, [('function.around', 'function next(value: Int): Int = value + 1'),
                     ('function.around', 'action increment() { count = count + 1 }')])
     objects = query_captures(root / 'languages/acore/textobjects.scm', path)

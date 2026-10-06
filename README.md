@@ -7,12 +7,12 @@ objects; the shared compiler supplies types and validated edits.
 
 **Accepted host:** Apple Silicon macOS 26.2 with Zed 1.22.0. Linux, Windows,
 remote execution and physical Intel macOS acceptance remain pending. The native
-server and optional CLI have separate distribution and licensing. The Mac native ZIP is published at
-[Acore LSP 0.1.0](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.0).
-Adapter v0.1.1 uses an explicit path/PATH for this ZIP; automatic native
-downloads remain disabled. Registry
-publication requires a human-submitted PR and maintainer merge; this source
-candidate is usable as a dev extension now.
+server and optional CLI have separate distribution and licensing. Use
+[Acore LSP 0.1.1](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.1)
+with adapter **0.1.3** and its publicly pinned grammar for the L1–L9 features.
+Install the verified ZIP through an explicit path/PATH; automatic native downloads
+remain disabled. Registry publication awaits a human-submitted PR and maintainer
+merge. The public source can be installed as a dev extension now.
 
 ## Install and try it
 
@@ -51,12 +51,13 @@ supported signatures, hover, physical definition/type navigation, references,
 workspace symbols, semantic colors, conservative formatting, validated authored
 symbol rename and supported quick fixes. Configuration adds inlay hints and
 valid same-directory file refactors. Syntax/brackets/indentation/outline/text
-objects and four snippets are available. Copyable project-local CLI tasks are
+objects and thirteen checked starters are available. Copyable project-local CLI tasks are
 optional and run explicitly against saved inputs.
 
-Only `.acore` is registered. Saved manifests inform project ownership; their
-unsaved buffers retain ordinary language tooling. Zed has no implemented type
-hierarchy, typed manifest attachment, read-only virtual SDK/library/contract
+The server registers for Acore and the existing TOML and JSON languages. Recognized Axiom
+manifest buffers receive completion, hover and unsaved-overlay analysis. Ordinary
+TOML/JSON keeps its identity and receives no Axiom editing vocabulary or diagnostics.
+Zed has no implemented type hierarchy, read-only virtual SDK/library/contract
 provider or graph panel in this adapter. Virtual navigation is disabled;
 physical navigation and SDK hover remain available. A rejected configuration
 file refactor does not stop Zed moving the file. Read the full
@@ -73,6 +74,7 @@ still take seconds; see [performance/support](docs/PERFORMANCE.md).
 - [Install from Git / dev extension](docs/INSTALL.md)
 - [Settings and server compatibility](docs/SETTINGS.md)
 - [Test source, real native LSP and Zed](docs/TESTING.md)
+- [L1–L6 authoring, manifests and starters](docs/AUTHORING.md)
 - [Typed editing walkthrough](docs/TYPED_EDITING.md)
 - [Configuration hints, manifests and file refactors](docs/E7_CONFIGURATION.md)
 - [Explicit CLI tasks](docs/CLI.md) and [foreign workflows](docs/FOREIGN_WORKFLOWS.md)
@@ -82,6 +84,8 @@ still take seconds; see [performance/support](docs/PERFORMANCE.md).
 
 The extension source contains no native executable or private compiler/runtime
 source. Public source releases are exported from an explicit allowlist with
-fresh history. The grammar has separate Apache notices; downloaded native tools
+reviewed source-only history. The grammar has separate Apache notices; downloaded native tools
 are not covered by this adapter's license. See [LICENSE](LICENSE), [NOTICE](NOTICE)
 and [third-party notices](THIRD_PARTY_NOTICES.md).
+
+See [Private JSON and workflows](docs/WORKFLOWS.md) for the shared L7–L9 layer and task installation.

@@ -1,155 +1,108 @@
 # Install Acore for Zed
 
-The Apache-2.0 adapter and grammar can be installed from their reviewed source
-release. Download the compatible Mac native server from
-[Acore LSP 0.1.0](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.0).
-Registry installation and automatic native downloading remain pending. The
-ZIP is used through explicit path/PATH selection; the adapter
-`releases/server.json` still has `activeRelease: null`.
+Zed adapter **0.1.3** uses the public grammar pinned in `extension.toml` and
+[Acore LSP 0.1.1](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.1).
+This native release contains L1–L9. The historical 0.1.0 ZIP remains unchanged.
+Apple Silicon macOS is validated; Intel macOS, Linux, Windows and remote desktop
+acceptance remain pending. Registry installation awaits human submission and
+maintainer merge. Automatic server downloads remain disabled.
 
-## From Git
-
-Use the reviewed public source tags:
+## Install the public source locally
 
 ```sh
-git clone --branch v0.1.1 https://github.com/AxiomCore/acore-zed.git
-git clone --branch v0.1.0 https://github.com/AxiomCore/tree-sitter-acore.git
+git clone --branch v0.1.3 https://github.com/AxiomCore/acore-zed.git
 cd acore-zed
-```
-
-The server is supplied separately; source checkout access alone does not supply
-it. A team may also share these same reviewed sources through private Git.
-
-## From the source checkout
-
-Keep `acore-zed` and `tree-sitter-acore` beside one another. Install Rust through rustup and Tree-sitter CLI
-0.25.4. From `acore-zed`:
-
-```sh
 rustup toolchain install 1.93.0 --profile minimal
 rustup target add wasm32-wasip2 --toolchain 1.93.0
-cargo +1.93.0 test --locked --lib
-cargo +1.93.0 build --locked --release --target wasm32-wasip2
-python3 scripts/check-grammar.py
-python3 scripts/configure-dev.py
 ```
 
-Run `tree-sitter test` from the sibling grammar checkout as well. The optional
-`--examples ../axiom-frontend/apps/playground/src/examples` argument to
-`check-grammar.py` also validates the local playground corpus.
+In Zed run **zed: install dev extension**, and select this checkout directory
+containing `extension.toml`. Zed builds the adapter and downloads/builds the exact
+public grammar revision itself. The native compiler is supplied separately below.
+Other developers can use the same Git URL/tag and installation action; no private
+compiler source checkout is needed. The Apache-2.0 adapter/grammar licenses do not
+license the native compiler or optional CLI.
 
-The grammar checkout must be clean and committed. The helper pins its exact
-revision in an ignored development copy and prints that copy's directory.
-The published manifest pins the public grammar commit. The local helper
-overrides that pin only in the ignored dev copy for local grammar testing.
+## Install and select the native server
 
-In Zed, open the command palette, run **zed: install dev extension**, and
-select the printed directory. Zed builds the Rust adapter and grammar; it can
-download the grammar's WASI SDK automatically. When updating source, rerun
-`configure-dev.py`, run **zed: rebuild dev extension**, and restart the language
-server if its settings changed. A successful standalone Cargo build does not update Zed's installed
-WebAssembly component. [Zed dev installation](https://zed.dev/docs/extensions/developing-extensions).
-
-Zed 1.21.0 showed duplicate snippet suggestions after a same-session rebuild.
-The manifest references each of the four snippets once; expansion and tab
-stops still work. Zed's snippet registry appends entries on registration, and
-extension reload does not remove them. A normal restart after saving your work
-is expected to clear that session state; restart recovery was not performed
-during acceptance because other user windows were open.
-[Zed snippet registry](https://github.com/zed-industries/zed/blob/33c95853ed2b6956f339733c63a8220964ecbeb6/crates/snippet_provider/src/registry.rs).
-
-## Select the native server
-
-For Apple Silicon macOS, download all three release assets into an empty
-folder and check the ZIP and metadata before extracting:
+For Apple Silicon macOS, download all three assets into a new directory:
 
 ```sh
-mkdir acore-lsp-0.1.0
-cd acore-lsp-0.1.0
-curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.0/acore-lsp-macos-arm64.zip
-curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.0/acore-lsp-release.json
-curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.0/SHA256SUMS
+mkdir acore-lsp-0.1.1
+cd acore-lsp-0.1.1
+curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.1/acore-lsp-macos-arm64.zip
+curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.1/acore-lsp-release.json
+curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.1/SHA256SUMS
 shasum -a 256 -c SHA256SUMS
 unzip acore-lsp-macos-arm64.zip
 ./acore-lsp --version-json
+file ./acore-lsp
+shasum -a 256 ./acore-lsp
 ```
 
-The accepted native SHA256 is
-`1b668d5e0a2fcb94ee24e7aef1c575b876125e92253760c1f8d6838287a35847`.
-Native distribution terms and dependency notices are in the ZIP. Signing,
-notarization and recipient-machine Gatekeeper acceptance remain pending.
-No security bypass is part of these installation steps.
+The accepted executable SHA-256 is `582716716d1c72ef2de00c346e37868ee892bae71df34538493c9fa3814c0af7`.
+Version metadata must report `acore/0.1.1 (E7)`, `axiom-editor/v1`,
+`compilerVersion: dc94883ad55983d698a5141bd0e4230075365de549209a52949933d8bb563195`
+and `editorFeatures.virtualDocumentNavigationOptOut: true`.
+The ZIP includes separate proprietary terms and dependency notices.
+Signing, notarization and recipient-machine Gatekeeper acceptance remain pending;
+no security bypass is part of these steps.
 
-Inspect the extracted binary before configuring it:
+Set an absolute executable path in Zed user settings:
+
+```json
+{
+  "lsp": {"acore-lsp": {"binary": {"path": "/absolute/path/to/acore-lsp"}}},
+  "languages": {"Acore": {"semantic_tokens": "combined", "inlay_hints": {"enabled": true}}}
+}
+```
+
+Alternatively install the verified executable as `acore-lsp` on the worktree PATH.
+Run **editor: restart language server** after changing it. An explicit path takes
+precedence over PATH. Verify that the intended process/version is selected; an
+old executable can still speak the protocol while lacking the new features.
+Core editing needs no CLI. Explicit tasks require a separately supplied CLI with
+the same `compilerVersion`; use the private validated CLI until a matching CLI
+release is available. See [WORKFLOWS.md](WORKFLOWS.md).
+
+## Check the installed editor
+
+Open one of the [four example projects](../examples/README.md). Check the Acore
+language in the status bar, hover a declaration, insert a typed completion,
+request a signature, introduce an unsaved type error and repair it. Repeat after
+restarting the language server. In `AxiomDeps.toml`, check field documentation and
+Audience values. In a frontend `form_model`, hover `raw` and `trim`, check typed
+String member completion and contextual syntax coloring. Recognized private JSON
+receives role help; ordinary JSON/TOML retains its normal providers.
+
+Use **zed: open log** for startup failures. Missing paths, wrong permissions,
+wrong architecture or incompatible metadata need the appropriate verified
+executable. See [TESTING.md](TESTING.md), [FEATURES.md](FEATURES.md) and
+[TROUBLESHOOTING.md](TROUBLESHOOTING.md) for exact limits.
+
+## Develop grammar or adapter changes
+
+For optional local grammar work, clone the public grammar beside the adapter and
+check out its exact `extension.toml` revision. With Tree-sitter CLI 0.25.4:
 
 ```sh
-/absolute/path/to/acore-lsp --version-json
-file /absolute/path/to/acore-lsp
-shasum -a 256 /absolute/path/to/acore-lsp
+git clone https://github.com/AxiomCore/tree-sitter-acore.git ../tree-sitter-acore
+git -C ../tree-sitter-acore checkout 39bfab9ded526cf141bfdc18416c92cd2bcfca1f
+cargo +1.93.0 test --locked --release --lib
+cargo +1.93.0 build --locked --release --target wasm32-wasip2
+python3 scripts/check-grammar.py
+python3 scripts/test-workflows.py
+python3 tests/test_release_tools.py
+(cd ../tree-sitter-acore && tree-sitter test)
+python3 scripts/configure-dev.py
 ```
 
-Use the maintainer's recorded digest and host architecture. The current
-protocol is `axiom-editor/v1`; Z4 also requires version metadata
-`editorFeatures.virtualDocumentNavigationOptOut: true`. Obtain the matching
-Z4 server as well as the adapter, because older E7 binaries are rejected.
-Set `lsp.acore-lsp.binary.path` to the absolute
-executable path in Zed settings, or install it as `acore-lsp` on the worktree
-PATH. See [settings](SETTINGS.md). The CLI is optional for core editing.
+Install the printed development copy using Zed's dev extension action. For
+updates, pull the new reviewed tag, rebuild the dev extension and restart the
+language server. Keep the old checkout/native version for rollback. A standalone
+Cargo build alone does not update Zed's installed component. Same-session rebuilds
+can duplicate snippet registrations; save work and restart Zed if affected.
 
-## Verify the editor
-
-Open a complete project and a `.acore` file. Confirm the status bar says
-**Acore**, then check syntax coloring, compiler hover and diagnostics. For a
-configuration project, start with:
-
-```acore
-class Settings { enabled: Boolean = true }
-settings: Settings = Settings { enabled = false }
-count = 42
-```
-
-Hover `Settings`; enable hints and check `count: Int`; change an explicitly
-typed value to an incompatible string and check its diagnostic. Allow analysis
-to finish before testing completion or navigation. Z1 syntax and Z2 native
-connection acceptance and Z3 standard typed editing are complete on macOS
-ARM64. Z3 used Zed 1.22.0 and passed the restart action with unsaved buffers.
-Z4 E7/configuration compatibility is complete with the explicit host limits in
-[E7_CONFIGURATION.md](E7_CONFIGURATION.md). After changing
-startup settings, reopen the project in a new window if the server restart does
-not reconnect the buffers. Follow the [typed-editing walkthrough](TYPED_EDITING.md)
-and [feature guide](FEATURES.md) for the current evidence and limits.
-
-Use **zed: open log** for startup failures. A missing server has an actionable
-message. Check the configured path, permissions, architecture and version for
-wrong-binary failures. The Z2 adapter validates
-`--version-json` before initialization; [verified downloads and cache recovery](DISTRIBUTION.md)
-are implemented, with public asset promotion pending.
-See [connection troubleshooting](TROUBLESHOOTING.md) for the current errors and
-recovery steps.
-
-For maintainers updating an already installed dev extension from the terminal:
-
-```sh
-python3 scripts/build-dev.py
-```
-
-This builds the locked release WASI component and regenerates the pinned dev
-copy. On this Mac, an installed out-of-tree dev symlink can be refreshed with:
-
-```sh
-python3 scripts/build-dev.py --installed-dev-link "$HOME/Library/Application Support/Zed/extensions/installed/acore"
-```
-
-The helper only refreshes a symlink that already points at the generated copy.
-It does not install a new extension or change Zed settings/trust. The release
-component retains its custom sections; Zed's own builder strips debug sections
-when using **zed: rebuild dev extension**. First installation still uses the
-Zed command. This terminal route is for private development, not registry
-packaging.
-
-macOS ARM64 release acceptance is complete for the supplied native candidate; Linux, Windows and physical Intel Mac acceptance are pending.
-
-After registry publication, open Zed **Extensions**, search **Acore** and install.
-Remove a dev override through Zed first when testing the registry package.
-Follow [TESTING.md](TESTING.md) for the complete test sequence and
-[MAINTENANCE.md](MAINTENANCE.md) for distribution and updates.
+After registry approval, developers can search **Acore** in Zed's Extensions page.
+Remove a dev override before testing the registry package; this installation
+route is still pending. See [MAINTENANCE.md](MAINTENANCE.md) for future releases.

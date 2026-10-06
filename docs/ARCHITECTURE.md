@@ -15,7 +15,7 @@ Neither client reimplements the domain type checker.
 | Packaging | VSIX / Marketplace | Zed extension repository / registry |
 | Configuration hints | Native configuration hints through the host | Same native hints through Zed |
 | Type hierarchy | VS Code provider | No tested Zed host surface |
-| Typed manifest buffers | VS Code attachment | Native services exist; no generic-language attachment in this adapter |
+| Typed manifest buffers | VS Code attachment | Shared services attached to existing TOML for recognized manifests; ordinary TOML receives no Axiom authoring |
 | Virtual SDK/library/contract documents | VS Code read-only providers | Navigation disabled; physical navigation and SDK hover remain |
 | Inspector/graph presentation | VS Code custom presentation | No Zed panel implemented |
 

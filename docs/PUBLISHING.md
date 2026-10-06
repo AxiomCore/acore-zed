@@ -2,8 +2,8 @@
 
 The adapter is Apache-2.0 by owner choice. The reviewed adapter/grammar
 source is public. The owner subsequently approved the Mac native ZIP at
-[Acore LSP 0.1.0](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.0).
-The Z6 automatic installer remains disabled in adapter v0.1.1; use the public
+[Acore LSP 0.1.1](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.1).
+The Z6 automatic installer remains disabled in adapter v0.1.3; use the public
 ZIP with explicit path/PATH selection. See
 [distribution preparation](DISTRIBUTION.md).
 
@@ -30,11 +30,10 @@ are also inspectable.
 [Publishing prerequisites](https://zed.dev/docs/extensions/publishing/prerequisites),
 [license requirements](https://zed.dev/docs/extensions/publishing/license-requirements).
 
-The public adapter candidate is v0.1.1; its grammar remains pinned to the
-public v0.1.0 revision. Keep the versions independent. Install and test the exact
-adapter commit in Zed before recording it in the registry. The later standalone Mac native release is available
-separately. Prepare registry submission using the tested public revision and
-current ZIP/path installation instructions.
+The public adapter is **v0.1.3**; its manifest pins the new reviewed grammar
+revision. The compatible Mac native release is **0.1.1**. These versions are
+independent. Use the tested public adapter revision for the registry submission
+and disclose manual ZIP/path native installation and the pending host gates.
 Recheck that extension ID `acore` is available. Fork `zed-industries/extensions`,
 add the adapter as an HTTPS submodule at `extensions/acore`, add the matching
 version in `extensions.toml`, run `pnpm sort-extensions`, and prepare the

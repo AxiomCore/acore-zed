@@ -8,3 +8,8 @@
 (domainFunction name: (identifier) @name) @item
 (domainBinding name: (identifier) @name) @item
 (docComment) @annotation
+
+(namedRouteDeclaration name: (identifier) @name) @item
+(routeParameter name: (identifier) @name) @item
+(migrationDeclaration version: (intLiteralExpr) @name) @item
+(constructorExpr (qualifiedIdentifier) @name) @item

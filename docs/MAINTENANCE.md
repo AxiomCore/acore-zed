@@ -67,7 +67,7 @@ native compiler repositories.
 ## Release a native compiler/server update
 
 The compatible Mac server is published separately in
-[AxiomCore/AxiomCore Releases](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.0).
+[AxiomCore/AxiomCore Releases](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.1).
 Build and test native changes privately, then use the release dashboard's
 **Acore LSP** component to publish a new immutable ZIP, compatibility manifest
 and checksums. Source remains private. Supply the matching optional CLI when

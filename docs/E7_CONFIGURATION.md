@@ -2,8 +2,8 @@
 
 Z4 is complete for the private macOS ARM64 alpha in Zed 1.22.0. Configuration
 inlay hints and valid same-directory configuration file refactors are tested
-in the editor. Type hierarchy, typed manifest attachment and virtual document
-views have the host limits below. Other operating systems remain pending.
+in the editor. L3 adds typed TOML manifest attachment and unsaved overlays. Type hierarchy
+and virtual document views retain the host limits below. Other operating systems remain pending.
 
 ## Enable and test configuration hints
 
@@ -121,41 +121,20 @@ graphs are not implemented.
 
 ## Manifests and other language providers
 
-The default extension registers only `.acore` as Acore. Keep `AxiomDeps.toml`,
-JSON/YAML inputs, workflow TOML and Pkl files in their usual languages. Z4
-verified ordinary TOML, JSON, YAML and Pkl identities and their existing host
-tooling without an Acore `didOpen` for those files.
+Adapter 0.1.2 registers the same native server for Acore and existing TOML.
+This supersedes Z4's Acore-only manifest attachment limit. `AxiomDeps.toml` stays
+TOML and receives Axiom completion, hover, diagnostics and unsaved overlays.
+Ordinary TOML receives no Axiom vocabulary/hover/formatting/diagnostics. Other
+host providers can remain enabled; JSON/YAML/Pkl retain their ordinary providers
+and do not gain buffer attachment from this change.
 
-Saved recognized manifests and locks still inform the owning Acore snapshot.
-Z4 changed a saved backend manifest to an invalid `type`: its open `.acore`
-owner received a diagnostic, and saving the repair cleared it. The same
-unsaved TOML edit did not change Acore analysis, because this adapter has no
-manifest buffer attachment. Save relevant manifests before expecting their
-changes to reach the native project. Existing TOML/JSON/YAML/Pkl tooling handles
-those buffers; this is not typed Axiom manifest completion or hover in Zed.
-
-`configurationFiles` maps native filename/glob associations to manifest kinds:
-
-```json
-{
-  "lsp": {
-    "acore-lsp": {
-      "initialization_options": {
-        "configurationFiles": { "**/sandbox.toml": "extension-workflow" }
-      }
-    }
-  }
-}
-```
-
-This refines native recognition; it does not attach the server to another
-Zed language. Z4 tried adding `acore-lsp` to TOML/JSON/YAML `language_servers`:
-that did not attach this extension's Acore-only adapter. The reviewed host
-registers extension adapters per manifest language, and its extension manifest
-does not provide a filename-scoped server association. Listing generic
-languages there would broaden default attachment. The release draft keeps
-its Acore-only registration and defers typed manifest UI rather than defining
-replacement generic languages or changing `file_types`.
+Saved recognized manifests/locks continue to inform the owning Acore snapshot.
+An unsaved valid backend manifest now updates its open Acore owner: declared
+Audience choices change without saving. Invalid TOML or invalid manifest fields
+produce diagnostics, and repairing the buffer restores the current snapshot.
+See [AUTHORING.md](AUTHORING.md) for repeatable L1–L6 checks and explicit evolution
+settings. `configurationFiles` still refines recognized native formats; it does
+not define a replacement TOML language or automatically attach JSON/YAML.
 
 Native TOML manifest completion/navigation, filename associations, YAML
 migration-only behavior, static `PklProject` queries and stale contract/lock

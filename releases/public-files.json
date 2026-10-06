@@ -12,6 +12,7 @@
     "README.md",
     "THIRD_PARTY_NOTICES.md",
     "docs/ARCHITECTURE.md",
+    "docs/AUTHORING.md",
     "docs/CLI.md",
     "docs/DISTRIBUTION.md",
     "docs/E7_CONFIGURATION.md",
@@ -25,6 +26,7 @@
     "docs/TESTING.md",
     "docs/TROUBLESHOOTING.md",
     "docs/TYPED_EDITING.md",
+    "docs/WORKFLOWS.md",
     "examples/README.md",
     "examples/backend/AxiomDeps.toml",
     "examples/backend/main.acore",
@@ -55,7 +57,9 @@
     "scripts/configure-dev.py",
     "scripts/package-server.py",
     "scripts/prepare-public.py",
+    "scripts/run-workflow.py",
     "scripts/smoke-server.py",
+    "scripts/test-workflows.py",
     "snippets/acore.json",
     "src/installer.rs",
     "src/installer/tests.rs",
@@ -65,6 +69,7 @@
     "templates/check-tasks.json",
     "templates/foreign-tasks.json",
     "templates/tooling-tasks.json",
+    "templates/workflow-tasks.json",
     "tests/test_release_tools.py"
   ],
   "tree-sitter-acore": [
