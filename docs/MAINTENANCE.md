@@ -66,24 +66,23 @@ native compiler repositories.
 
 ## Release a native compiler/server update
 
-The initial distribution keeps the native server private by owner choice. Build
-and test privately, then supply authorized developers a versioned binary, its
-trusted SHA-256, compatibility metadata and separate terms/notices. Supply a
-matching optional CLI when its compiler fingerprint changes. Developers select
-the new executable through `lsp.acore-lsp.binary.path` and restart the server.
-Keep `releases/server.json` disabled; a private server update does not require
-a registry update unless the adapter/compatibility contract also changes.
+The compatible Mac server is published separately in
+[AxiomCore/AxiomCore Releases](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.0).
+Build and test native changes privately, then use the release dashboard's
+**Acore LSP** component to publish a new immutable ZIP, compatibility manifest
+and checksums. Source remains private. Supply the matching optional CLI when
+its compiler fingerprint changes. Developers verify the assets, extract the
+ZIP, select the new executable through `lsp.acore-lsp.binary.path` and restart.
+A server upload does not update the adapter or its compiled release pins.
 
-Public automatic native downloads are a separate future decision. Before that
-route, review platform identities, dependency notices, redistribution terms and
-macOS signing/notarization. If signing changes bytes, repackage and rerun checks
-against the final artifact. Publish new immutable assets in an assets-only
-distribution repository after review. Download them anonymously and compare exact size/SHA-256/metadata.
-Update the adapter's compiled `releases/server.json` with that new release ID,
-platforms, URLs and digests, increase the adapter version, and follow the
-registry update process above. A server asset upload alone does not change the
-adapter's compiled pins. Other platforms remain unsupported until their own
-artifact and desktop acceptance pass.
+Keep `releases/server.json` disabled for this manual ZIP route. Enabling
+public automatic native downloads remains a separate adapter change: review
+platform identities, final-byte notices/terms and signing acceptance, publish
+installer-compatible assets, verify anonymous downloads, then update the
+compiled release ID, platform URLs and digests and bump the adapter version.
+The current installer expects a raw executable, so do not pin the ZIP URL as
+though it were the executable. Other platforms remain pending until their
+own artifact and desktop acceptance pass.
 
 If the compiler fingerprint changes, supply the matching optional CLI and
 refresh extraction explicitly before expecting the LSP to reuse its cache.

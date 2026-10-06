@@ -12,7 +12,7 @@ ZIP is used through explicit path/PATH selection; the adapter
 Use the reviewed public source tags:
 
 ```sh
-git clone --branch v0.1.0 https://github.com/AxiomCore/acore-zed.git
+git clone --branch v0.1.1 https://github.com/AxiomCore/acore-zed.git
 git clone --branch v0.1.0 https://github.com/AxiomCore/tree-sitter-acore.git
 cd acore-zed
 ```

@@ -16,7 +16,7 @@ The extension's version and native compiler fingerprint are separate.
 
 | Observed error | Recovery |
 | --- | --- |
-| Needs a standalone executable | Set `lsp.acore-lsp.binary.path` or put a compatible `acore-lsp` on the worktree PATH. The private alpha has no approved download release enabled. |
+| Needs a standalone executable | Set `lsp.acore-lsp.binary.path` or put a compatible `acore-lsp` on the worktree PATH. Automatic downloads are disabled; use the public Mac ARM64 ZIP documented in [INSTALL.md](INSTALL.md). |
 | No such file or directory | Correct the path. An explicit override takes priority over PATH and does not silently fall back. |
 | Permission denied | Check executable permissions on the verified native artifact. |
 | Exec format error / wrong host architecture | Use an artifact for the execution host. Only macOS ARM64 acceptance has been performed. |
@@ -66,5 +66,6 @@ Rename it back, repair diagnostics and retry, or update/recheck imports
 explicitly. Typed manifest attachment, hierarchy and virtual content views
 are unavailable in this adapter. See [E7/configuration limits](E7_CONFIGURATION.md).
 Z0–Z5 passed on macOS ARM64 in Zed 1.22.0. See [installer recovery](DISTRIBUTION.md)
-for Z6 download/cache failures. Final performance, public promotion and other
-host acceptance remain later gates.
+for Z6 download/cache failures. Public adapter/grammar sources and the separate Mac native ZIP are available.
+Registry publication and other-host acceptance remain pending; measured
+performance limits are recorded in [PERFORMANCE.md](PERFORMANCE.md).

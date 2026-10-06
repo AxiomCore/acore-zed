@@ -3,7 +3,7 @@
 The adapter is Apache-2.0 by owner choice. The reviewed adapter/grammar
 source is public. The owner subsequently approved the Mac native ZIP at
 [Acore LSP 0.1.0](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.0).
-The Z6 automatic installer remains disabled in adapter v0.1.0; use the public
+The Z6 automatic installer remains disabled in adapter v0.1.1; use the public
 ZIP with explicit path/PATH selection. See
 [distribution preparation](DISTRIBUTION.md).
 
@@ -20,17 +20,19 @@ compiler. The public Mac ZIP supplies the accepted executable, trusted digests,
 compatibility manifest, native notice and conservative dependency notice
 inventory. Native implementation source remains private. Signing/notarization
 and recipient-machine Gatekeeper acceptance remain pending. The extension
-must locate/download the server; it must not bundle an executable. The release candidate records
-binary licensing/dependency metadata and signing status. Digest-bound platform
-selection, cache recovery and offline reuse are implemented; licensing/notices,
-public activation and signing policy remain owner review gates. A public grammar reveals Acore syntax;
-public native binaries are also inspectable.
+must locate/download the server; it must not bundle an executable. The native
+release records licensing/dependency metadata and signing status.
+Digest-bound platform selection, cache recovery and offline reuse are implemented
+in the adapter, but no automatic release is enabled. Enabling a raw-executable
+download requires a separately reviewed manifest; the existing ZIP is a manual
+installation route. A public grammar reveals Acore syntax; public native binaries
+are also inspectable.
 [Publishing prerequisites](https://zed.dev/docs/extensions/publishing/prerequisites),
 [license requirements](https://zed.dev/docs/extensions/publishing/license-requirements).
 
-The reviewed adapter and grammar v0.1.0 source releases are public. Their HTTPS
-URLs and grammar revision are pinned, and the exact tagged adapter has passed
-macOS dev installation. The later standalone Mac native release is available
+The public adapter candidate is v0.1.1; its grammar remains pinned to the
+public v0.1.0 revision. Keep the versions independent. Install and test the exact
+adapter commit in Zed before recording it in the registry. The later standalone Mac native release is available
 separately. Prepare registry submission using the tested public revision and
 current ZIP/path installation instructions.
 Recheck that extension ID `acore` is available. Fork `zed-industries/extensions`,

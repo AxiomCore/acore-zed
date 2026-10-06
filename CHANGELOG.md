@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1
+
+Reject unknown language-server IDs before reading worktree settings or launching
+the native server. Update installation and maintenance instructions for the
+public Mac ARM64 Acore LSP 0.1.0 ZIP. The adapter and native server have separate
+versions; explicit binary path/PATH selection remains the initial install route.
+Automatic native downloads and other OS acceptance remain pending.
+
 ## 0.1.0
 
 Initial macOS ARM64 development release of the Apache-2.0 Acore Zed adapter.

@@ -9,7 +9,7 @@ objects; the shared compiler supplies types and validated edits.
 remote execution and physical Intel macOS acceptance remain pending. The native
 server and optional CLI have separate distribution and licensing. The Mac native ZIP is published at
 [Acore LSP 0.1.0](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.0).
-Adapter v0.1.0 uses an explicit path/PATH for this ZIP; automatic native
+Adapter v0.1.1 uses an explicit path/PATH for this ZIP; automatic native
 downloads remain disabled. Registry
 publication requires a human-submitted PR and maintainer merge; this source
 candidate is usable as a dev extension now.

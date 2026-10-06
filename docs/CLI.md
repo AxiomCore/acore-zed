@@ -2,8 +2,9 @@
 
 Core editing needs only `acore-lsp`. The separate `axiom` CLI is optional;
 its executable is independent of `lsp.acore-lsp.binary.path`. Install a
-compatible CLI through your team's existing distribution route. Public CLI
-and server downloads are not supplied by this private development alpha.
+compatible CLI through your team's existing distribution route. The public
+Mac ARM64 server ZIP and its verification steps are documented in
+[INSTALL.md](INSTALL.md).
 
 Confirm the tools from the same environment as Zed's worktree terminal:
 

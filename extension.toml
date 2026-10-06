@@ -1,10 +1,10 @@
 id = "acore"
 name = "Acore"
-version = "0.1.0"
+version = "0.1.1"
 schema_version = 1
 authors = ["AxiomCore contributors"]
 description = "Compiler-backed Acore configuration, backend, frontend and database authoring"
-# Public URLs are deliberately unset until release approval. Use configure-dev.
+# Public adapter source; the compatible native server is distributed separately.
 repository = "https://github.com/AxiomCore/acore-zed"
 snippets = ["snippets/acore.json"]
 
