@@ -91,11 +91,14 @@ git -C ../tree-sitter-acore checkout 39bfab9ded526cf141bfdc18416c92cd2bcfca1f
 cargo +1.93.0 test --locked --release --lib
 cargo +1.93.0 build --locked --release --target wasm32-wasip2
 python3 scripts/check-grammar.py
-python3 scripts/test-workflows.py
 python3 tests/test_release_tools.py
 (cd ../tree-sitter-acore && tree-sitter test)
 python3 scripts/configure-dev.py
 ```
+
+The real CLI workflow tests additionally need `AXIOM_CLI_PATH` and
+`ACORE_LSP_PATH` pointing to matching tools; then run
+`python3 scripts/test-workflows.py`.
 
 Install the printed development copy using Zed's dev extension action. For
 updates, pull the new reviewed tag, rebuild the dev extension and restart the
