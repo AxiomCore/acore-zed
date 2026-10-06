@@ -1,0 +1,6 @@
+amends "types.acore"
+label: String = "Acore é😀"
+count = 42
+flag: Boolean = false
+settings: Settings = Settings { enabled = false }
+maximum = math.max(1, 2)

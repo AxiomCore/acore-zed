@@ -1,0 +1,28 @@
+name: Future platform source checks
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  portable-source:
+    name: Source only / ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Install pinned Rust and WASI target
+        run: rustup toolchain install 1.93.0 --profile minimal --target wasm32-wasip2
+      - name: Adapter tests
+        run: cargo +1.93.0 test --locked --lib
+      - name: Portable component
+        run: cargo +1.93.0 build --locked --release --target wasm32-wasip2
+      - name: Acceptance boundary
+        shell: bash
+        run: |
+          echo "These jobs check portable source. Actual Zed desktop and native artifact acceptance remain separate."
+          echo "No private native compiler source is checked out or uploaded."

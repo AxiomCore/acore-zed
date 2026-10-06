@@ -1,0 +1,1 @@
+class Settings { enabled: Boolean = true }

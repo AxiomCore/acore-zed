@@ -1,0 +1,19 @@
+{
+  "format": "acore-zed-platform-acceptance/v1",
+  "platforms": {
+    "macos-aarch64": {
+      "status": "accepted-local-supplied-native-candidate",
+      "os": "macOS 26.2",
+      "hardware": "Apple M2",
+      "zed": "1.22.0",
+      "nativeSha256": "1b668d5e0a2fcb94ee24e7aef1c575b876125e92253760c1f8d6838287a35847",
+      "publicNativeDownload": "pending separate redistribution approval",
+      "registryInstall": "pending human submission and maintainer merge"
+    },
+    "macos-x86_64": {"status": "pending physical Intel host and artifact acceptance"},
+    "linux-x86_64": {"status": "pending native artifact and actual Zed acceptance"},
+    "windows-x86_64": {"status": "pending native artifact and actual Zed acceptance"},
+    "remote": {"status": "pending execution-host and actual remote Zed acceptance"}
+  },
+  "rule": "Source/portable WASI CI success does not certify a native platform or desktop client."
+}

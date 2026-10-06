@@ -1,0 +1,6 @@
+Acore for Zed
+Copyright 2026 AxiomCore contributors
+
+This adapter is licensed under Apache-2.0. The separately distributed native
+language server and compiler are not covered by this adapter license.
+Adapted language queries retain the notices in THIRD_PARTY_NOTICES.md.

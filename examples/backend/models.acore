@@ -1,0 +1,7 @@
+project(id: "zed.example.backend", version: "1.0.0")
+
+model Task {
+  id: String
+  title: String
+  completed: Bool
+} also entity

@@ -1,0 +1,26 @@
+id = "acore"
+name = "Acore"
+version = "0.1.0"
+schema_version = 1
+authors = ["AxiomCore contributors"]
+description = "Compiler-backed Acore configuration, backend, frontend and database authoring"
+# Public URLs are deliberately unset until release approval. Use configure-dev.
+repository = "https://github.com/AxiomCore/acore-zed"
+snippets = ["snippets/acore.json"]
+
+# Inspect only the selected executable's version interface. No arbitrary args.
+[[capabilities]]
+kind = "process:exec"
+command = "*"
+args = ["--version-json"]
+
+[grammars.acore]
+repository = "https://github.com/AxiomCore/tree-sitter-acore"
+rev = "243f703d3d5b37cf6b1e279aa50a55683e597e45"
+
+[language_servers.acore-lsp]
+name = "Acore Language Server"
+languages = ["Acore"]
+
+[language_servers.acore-lsp.language_ids]
+"Acore" = "acore"

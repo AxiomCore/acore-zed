@@ -1,0 +1,71 @@
+{
+  "Acore typed configuration": {
+    "prefix": "acore-config",
+    "description": "Typed configuration with a reusable class and scoped function.",
+    "body": [
+      "class Settings {",
+      "  enabled: Boolean = true",
+      "  label: String = \"${1:Editor}\"",
+      "}",
+      "",
+      "settings: Settings = Settings { enabled = false }",
+      "transform = (value: Int) -> value + ${2:1}",
+      "$0"
+    ]
+  },
+  "Acore backend contract": {
+    "prefix": "acore-backend",
+    "description": "Offline typed backend contract starter.",
+    "body": [
+      "profile backend 1",
+      "project(id: \"${1:editor.backend}\", version: \"${2:1.0.0}\")",
+      "",
+      "model Task { id: String title: String }",
+      "",
+      "endpoint listTasks(method: GET, path: \"/tasks\") {",
+      "  response(type: List<Models.Task>)",
+      "}",
+      "$0"
+    ]
+  },
+  "Acore frontend application": {
+    "prefix": "acore-frontend",
+    "description": "Typed frontend app, state and action starter.",
+    "body": [
+      "module ${1:editor}.ui",
+      "",
+      "app EditorApp { route \"/\" => Home }",
+      "",
+      "page Home {",
+      "  state count: Int = 0",
+      "  action increment() { count = count + 1 }",
+      "  view {",
+      "    View {",
+      "      Text(\"${2:Hello}\")",
+      "      Button(label: \"Increment\", on_press: increment)",
+      "    }",
+      "  }",
+      "}",
+      "$0"
+    ]
+  },
+  "Acore PostgreSQL contract": {
+    "prefix": "acore-database",
+    "description": "Offline PostgreSQL schema. This declares a contract without migration authority.",
+    "body": [
+      "module ${1:editor}.storage",
+      "",
+      "database editor(engine: DatabaseEngine.postgres) {",
+      "  manage(schemas: [Schemas.app], mode: ManagementMode.ownedObjects)",
+      "  schema app {",
+      "    table tasks {",
+      "      id: Pg.Uuid",
+      "      title: Pg.Text",
+      "      primaryKey(columns: [.id])",
+      "    }",
+      "  }",
+      "}",
+      "$0"
+    ]
+  }
+}

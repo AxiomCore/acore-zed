@@ -1,0 +1,94 @@
+[
+  {
+    "label": "Acore: emit guest SDK interface (writes interface.json)",
+    "command": "\"$ACORE_CLI\"",
+    "args": [
+      "extensions",
+      "interface",
+      "\"$ACORE_ALIAS\"",
+      "--deps",
+      "\"$ACORE_DEPS\"",
+      "--out",
+      "\"$ACORE_INTERFACE\""
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "none",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "reveal": "always",
+    "hide": "never",
+    "show_summary": true,
+    "show_command": true,
+    "env": {
+      "ACORE_CLI": "axiom",
+      "ACORE_DEPS": "$ZED_WORKTREE_ROOT/AxiomDeps.toml",
+      "ACORE_INTERFACE": "$ZED_WORKTREE_ROOT/interface.json",
+      "ACORE_ALIAS": "guest"
+    },
+    "shell": {
+      "program": "/bin/sh"
+    }
+  },
+  {
+    "label": "Acore: prepare guest IDE helpers (writes .axiom)",
+    "command": "\"$ACORE_CLI\"",
+    "args": [
+      "extensions",
+      "prepare-ide",
+      "\"$ACORE_ALIAS\"",
+      "--deps",
+      "\"$ACORE_DEPS\"",
+      "--interface",
+      "\"$ACORE_INTERFACE\"",
+      "--json"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "none",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "reveal": "always",
+    "hide": "never",
+    "show_summary": true,
+    "show_command": true,
+    "env": {
+      "ACORE_CLI": "axiom",
+      "ACORE_DEPS": "$ZED_WORKTREE_ROOT/AxiomDeps.toml",
+      "ACORE_INTERFACE": "$ZED_WORKTREE_ROOT/interface.json",
+      "ACORE_ALIAS": "guest"
+    },
+    "shell": {
+      "program": "/bin/sh"
+    }
+  },
+  {
+    "label": "Acore: refresh saved native extraction (runs declared tools)",
+    "command": "\"$ACORE_CLI\"",
+    "args": [
+      "editor",
+      "refresh-extraction",
+      "--root",
+      "\"$ACORE_PROJECT_ROOT\"",
+      "--entry",
+      "\"$ACORE_ENTRY\"",
+      "--kind",
+      "config",
+      "--json"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "none",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "reveal": "always",
+    "hide": "never",
+    "show_summary": true,
+    "show_command": true,
+    "env": {
+      "ACORE_CLI": "axiom",
+      "ACORE_PROJECT_ROOT": "$ZED_WORKTREE_ROOT",
+      "ACORE_ENTRY": "$ZED_WORKTREE_ROOT/main.acore"
+    },
+    "shell": {
+      "program": "/bin/sh"
+    }
+  }
+]

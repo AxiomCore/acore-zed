@@ -1,0 +1,7 @@
+format = "axiom-deps/v2"
+type = "backend"
+audiences = ["web"]
+
+[application]
+name = "zed.example.backend"
+version = "1.0.0"

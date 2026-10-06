@@ -1,0 +1,12 @@
+module zed.example.storage
+
+database storage(engine: DatabaseEngine.postgres) {
+  manage(schemas: [Schemas.app], mode: ManagementMode.ownedObjects)
+  schema app {
+    table tasks {
+      id: Pg.Uuid(default: Pg.genRandomUuid())
+      title: Pg.VarChar(length: 240)
+      primaryKey(columns: [.id])
+    }
+  }
+}

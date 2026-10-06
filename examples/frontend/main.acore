@@ -1,0 +1,14 @@
+module zed.example.frontend.ui
+
+app ExampleApp { route "/" => Home }
+
+page Home {
+  state count: Int = 0
+  action increment() { count = count + 1 }
+  view {
+    View {
+      Text("Acore for Zed")
+      Button(label: "Increment", on_press: increment)
+    }
+  }
+}

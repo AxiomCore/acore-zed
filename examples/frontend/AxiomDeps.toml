@@ -1,0 +1,7 @@
+format = "axiom-deps/v2"
+type = "frontend"
+targets = ["web"]
+
+[application]
+name = "zed.example.frontend"
+version = "1.0.0"

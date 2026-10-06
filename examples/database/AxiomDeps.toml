@@ -1,0 +1,6 @@
+type = "database"
+targets = ["server"]
+
+[application]
+name = "zed.example.storage"
+version = "1.0.0"

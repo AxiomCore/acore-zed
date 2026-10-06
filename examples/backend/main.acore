@@ -1,0 +1,5 @@
+amends "models.acore"
+
+endpoint listTasks(method: GET, path: "/tasks") {
+  response(type: Entities.task)
+}

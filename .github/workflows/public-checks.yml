@@ -1,0 +1,55 @@
+name: Public adapter checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  adapter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          path: acore-zed
+          persist-credentials: false
+      - name: Install pinned Rust and WASI target
+        run: rustup toolchain install 1.93.0 --profile minimal --target wasm32-wasip2
+      - name: Adapter tests and WASI build
+        working-directory: acore-zed
+        run: |
+          cargo +1.93.0 test --locked --lib
+          cargo +1.93.0 build --locked --release --target wasm32-wasip2
+          python3 scripts/check-tasks.py
+      - name: Read immutable public grammar pin
+        id: grammar
+        working-directory: acore-zed
+        run: |
+          python3 - <<'PY'
+          import os, tomllib
+          from pathlib import Path
+          grammar = tomllib.loads(Path('extension.toml').read_text())['grammars']['acore']
+          repository = grammar['repository']
+          revision = grammar['rev']
+          if repository:
+              assert repository.startswith('https://github.com/') and len(revision) == 40
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+                  output.write('repository=' + repository.removeprefix('https://github.com/').removesuffix('.git') + '\n')
+                  output.write('revision=' + revision + '\n')
+          PY
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        if: steps.grammar.outputs.repository != ''
+        with:
+          repository: ${{ steps.grammar.outputs.repository }}
+          ref: ${{ steps.grammar.outputs.revision }}
+          path: tree-sitter-acore
+          persist-credentials: false
+      - name: Grammar corpus and adapter queries
+        if: steps.grammar.outputs.repository != ''
+        run: |
+          cargo +1.93.0 install tree-sitter-cli --locked --version 0.25.4
+          cd tree-sitter-acore
+          tree-sitter test
+          cd ../acore-zed
+          python3 scripts/check-grammar.py
+          python3 tests/test_release_tools.py
