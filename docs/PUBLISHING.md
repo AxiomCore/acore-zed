@@ -1,8 +1,10 @@
 # Publication gates
 
+**Release update (7 October 2026):** native LSP 0.1.0/0.1.1 downloads are withdrawn. Do not install or redistribute them; see [release status](RELEASE-STATUS.md). References below describe historical acceptance, not a currently available native release.
+
 The adapter is Apache-2.0 by owner choice. The reviewed adapter/grammar
 source is public. The owner subsequently approved the Mac native ZIP at
-[Acore LSP 0.1.1](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.1).
+[withdrawn native release](RELEASE-STATUS.md).
 The Z6 automatic installer remains disabled in adapter v0.1.3; use the public
 ZIP with explicit path/PATH selection. See
 [distribution preparation](DISTRIBUTION.md).

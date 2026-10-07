@@ -1,8 +1,10 @@
 # Verified server installation and recovery
 
+**Release update (7 October 2026):** native LSP 0.1.0/0.1.1 downloads are withdrawn. Do not install or redistribute them; see [release status](RELEASE-STATUS.md). References below describe historical acceptance, not a currently available native release.
+
 The Z6 installer is implemented and locally accepted on macOS ARM64. The owner
 subsequently approved public Mac native ZIP delivery at
-[AxiomCore/AxiomCore](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.1),
+[withdrawn native release](RELEASE-STATUS.md),
 separate from the Apache-2.0 adapter/grammar source.
 Registry installation remains pending human submission and maintainer merge.
 `releases/server.json` deliberately has `activeRelease: null` in this release. With no explicit path or worktree PATH server, it reports that no approved

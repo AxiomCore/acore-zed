@@ -7,12 +7,12 @@ objects; the shared compiler supplies types and validated edits.
 
 **Accepted host:** Apple Silicon macOS 26.2 with Zed 1.22.0. Linux, Windows,
 remote execution and physical Intel macOS acceptance remain pending. The native
-server and optional CLI have separate distribution and licensing. Use
-[Acore LSP 0.1.1](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.1)
-with adapter **0.1.3** and its publicly pinned grammar for the L1–L9 features.
-Install the verified ZIP through an explicit path/PATH; automatic native downloads
-remain disabled. Registry publication awaits a human-submitted PR and maintainer
-merge. The public source can be installed as a dev extension now.
+server and optional CLI have separate distribution and licensing. Native LSP
+0.1.0 and 0.1.1 downloads are withdrawn pending a verified replacement; see
+[release status](docs/RELEASE-STATUS.md). Do not install or redistribute those
+versions. Automatic native downloads remain disabled. Registry publication
+awaits a human-submitted PR and maintainer merge. The public source can be
+installed as a dev extension now.
 
 ## Install and try it
 

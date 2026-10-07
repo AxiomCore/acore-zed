@@ -1,5 +1,7 @@
 # Distribute, update and roll back Acore for Zed
 
+**Release update (7 October 2026):** native LSP 0.1.0/0.1.1 downloads are withdrawn. Do not install or redistribute them; see [release status](RELEASE-STATUS.md). References below describe historical acceptance, not a currently available native release.
+
 ## Developer distribution
 
 Before registry publication, share the adapter/grammar Git checkouts or their
@@ -67,7 +69,7 @@ native compiler repositories.
 ## Release a native compiler/server update
 
 The compatible Mac server is published separately in
-[AxiomCore/AxiomCore Releases](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.1).
+[withdrawn native release](RELEASE-STATUS.md).
 Build and test native changes privately, then use the release dashboard's
 **Acore LSP** component to publish a new immutable ZIP, compatibility manifest
 and checksums. Source remains private. Supply the matching optional CLI when

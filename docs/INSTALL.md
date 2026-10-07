@@ -1,9 +1,9 @@
 # Install Acore for Zed
 
-Zed adapter **0.1.3** uses the public grammar pinned in `extension.toml` and
-[Acore LSP 0.1.1](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.1).
-This native release contains L1–L9. The historical 0.1.0 ZIP remains unchanged.
-Apple Silicon macOS is validated; Intel macOS, Linux, Windows and remote desktop
+Zed adapter **0.1.3** uses the public grammar pinned in `extension.toml`.
+Native LSP 0.1.0 and 0.1.1 downloads are withdrawn; see
+[release status](RELEASE-STATUS.md). Wait for a verified replacement before
+installing a native server. Intel macOS, Linux, Windows and remote desktop
 acceptance remain pending. Registry installation awaits human submission and
 maintainer merge. Automatic server downloads remain disabled.
 
@@ -25,28 +25,10 @@ license the native compiler or optional CLI.
 
 ## Install and select the native server
 
-For Apple Silicon macOS, download all three assets into a new directory:
-
-```sh
-mkdir acore-lsp-0.1.1
-cd acore-lsp-0.1.1
-curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.1/acore-lsp-macos-arm64.zip
-curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.1/acore-lsp-release.json
-curl -fLO https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.1/SHA256SUMS
-shasum -a 256 -c SHA256SUMS
-unzip acore-lsp-macos-arm64.zip
-./acore-lsp --version-json
-file ./acore-lsp
-shasum -a 256 ./acore-lsp
-```
-
-The accepted executable SHA-256 is `582716716d1c72ef2de00c346e37868ee892bae71df34538493c9fa3814c0af7`.
-Version metadata must report `acore/0.1.1 (E7)`, `axiom-editor/v1`,
-`compilerVersion: dc94883ad55983d698a5141bd0e4230075365de549209a52949933d8bb563195`
-and `editorFeatures.virtualDocumentNavigationOptOut: true`.
-The ZIP includes separate proprietary terms and dependency notices.
-Signing, notarization and recipient-machine Gatekeeper acceptance remain pending;
-no security bypass is part of these steps.
+Native downloads are temporarily unavailable while a corrected release is
+prepared. Do not reuse the withdrawn 0.1.0 or 0.1.1 archives, even if their old
+checksums match. Replacement instructions will include the exact version,
+checksums, compatibility metadata and acceptance scope.
 
 Set an absolute executable path in Zed user settings:
 
@@ -102,7 +84,7 @@ The real CLI workflow tests additionally need `AXIOM_CLI_PATH` and
 
 Install the printed development copy using Zed's dev extension action. For
 updates, pull the new reviewed tag, rebuild the dev extension and restart the
-language server. Keep the old checkout/native version for rollback. A standalone
+language server. Keep only verified, supported native versions for rollback. Withdrawn versions are not rollback candidates. A standalone
 Cargo build alone does not update Zed's installed component. Same-session rebuilds
 can duplicate snippet registrations; save work and restart Zed if affected.
 
