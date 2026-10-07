@@ -3,6 +3,17 @@ use zed_extension_api as zed;
 const PROTOCOL: &str = "axiom-editor/v1";
 const MAX_VERSION_BYTES: usize = 16 * 1024;
 
+pub const WITHDRAWN_SHA256: [&str; 2] = [
+    "582716716d1c72ef2de00c346e37868ee892bae71df34538493c9fa3814c0af7",
+    "1b668d5e0a2fcb94ee24e7aef1c575b876125e92253760c1f8d6838287a35847",
+];
+pub fn supported_version(value: &str) -> bool {
+    let Some(version) = value.split_whitespace().next().and_then(|v| v.strip_prefix("acore/")) else { return false; };
+    let numbers = version.split('.').map(str::parse::<u32>).collect::<Result<Vec<_>, _>>();
+    numbers.is_ok_and(|v| v.len() == 3 && (v[0], v[1], v[2]) >= (0, 1, 2))
+}
+
+
 pub fn absolute_command(command: &str, root: &str) -> String {
     if command.starts_with('/')
         || command.starts_with("\\\\")
@@ -46,9 +57,9 @@ fn validate_version(status: Option<i32>, stdout: &[u8]) -> zed::Result<()> {
     if !info
         .get("serverVersion")
         .and_then(|v| v.as_str())
-        .is_some_and(|v| v.starts_with("acore/") && v.len() > 6)
+        .is_some_and(supported_version)
     {
-        return Err("executable does not identify itself as acore-lsp".into());
+        return Err("Acore LSP 0.1.2 or newer is required; install the corrected server. Versions 0.1.0 and 0.1.1 were withdrawn.".into());
     }
     if info.get("protocolVersion").and_then(|v| v.as_str()) != Some(PROTOCOL) {
         return Err(format!(
@@ -76,7 +87,7 @@ mod tests {
     use zed::serde_json::json;
 
     fn info() -> zed::serde_json::Value {
-        json!({"serverVersion": "acore/0.1.0 (E7)", "protocolVersion": PROTOCOL,
+        json!({"serverVersion": "acore/0.1.2 (E7)", "protocolVersion": PROTOCOL,
                "compilerVersion": "a".repeat(64),
                "editorFeatures": {"virtualDocumentNavigationOptOut": true}})
     }
@@ -97,7 +108,7 @@ mod tests {
     #[test]
     fn rejects_wrong_or_incompatible_binary_metadata() {
         for (key, value, message) in [
-            ("serverVersion", json!("another-lsp/1.0"), "identify"),
+            ("serverVersion", json!("another-lsp/1.0"), "0.1.2"),
             (
                 "protocolVersion",
                 json!("axiom-editor/v2"),

@@ -22,7 +22,7 @@ impl Drop for Temp {
 const BYTES: &[u8] = b"reviewed test server, never executed";
 fn manifest() -> Value {
     json!({"format":"acore-server-releases/v1","activeRelease":"release-1","releases":[{
-    "id":"release-1","serverVersion":"acore/0.1.0 (E7)","protocolVersion":"axiom-editor/v1",
+    "id":"release-1","serverVersion":"acore/0.1.2 (E7)","protocolVersion":"axiom-editor/v1",
     "compilerVersion":"a".repeat(64),"virtualDocumentNavigationOptOut":true,"assets":[{
         "platform":"macos-aarch64","url":"https://example.org/releases/release-1/acore-lsp",
         "sha256":format!("{:x}",Sha256::digest(BYTES)),"size":BYTES.len()
@@ -294,4 +294,16 @@ fn symlink_cache_entries_and_directories_are_rejected() {
     let another = Temp::new();
     symlink(&temp.0, another.0.join("servers")).unwrap();
     assert!(ensure_asset(&another.0, r, a, good, no_exec).is_err());
+}
+
+#[test]
+fn withdrawn_versions_and_native_digests_cannot_be_restored_as_valid_pins() {
+    for version in ["acore/0.1.0 (E7)", "acore/0.1.1 (E7)"] {
+        let mut value = manifest(); value["releases"][0]["serverVersion"] = json!(version);
+        assert!(ReleasePins::parse(&value.to_string()).is_err());
+    }
+    for hash in crate::server::WITHDRAWN_SHA256 {
+        let mut value = manifest(); value["releases"][0]["assets"][0]["sha256"] = json!(hash);
+        assert!(ReleasePins::parse(&value.to_string()).is_err());
+    }
 }

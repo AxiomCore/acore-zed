@@ -1,5 +1,21 @@
 {
   "format": "acore-server-releases/v1",
-  "activeRelease": null,
-  "releases": []
+  "activeRelease": "acore-lsp-v0.1.2",
+  "releases": [
+    {
+      "id": "acore-lsp-v0.1.2",
+      "compilerVersion": "ae3ffe64d38ed57af5feca23f08601d3d0bc215f1d7f7bc67204d2ad0250086e",
+      "protocolVersion": "axiom-editor/v1",
+      "serverVersion": "acore/0.1.2 (E7)",
+      "virtualDocumentNavigationOptOut": true,
+      "assets": [
+        {
+          "platform": "macos-aarch64",
+          "url": "https://github.com/AxiomCore/AxiomCore/releases/download/acore-lsp-v0.1.2/acore-lsp-macos-arm64.bin",
+          "sha256": "911c7da384b2ea9b60be7171e218b6bdfabdd2b90073ab1cc1f4a891d7324030",
+          "size": 38008656
+        }
+      ]
+    }
+  ]
 }

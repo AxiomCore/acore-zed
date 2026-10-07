@@ -1,16 +1,13 @@
 # Install Acore for Zed
 
-Zed adapter **0.1.3** uses the public grammar pinned in `extension.toml`.
-Native LSP 0.1.0 and 0.1.1 downloads are withdrawn; see
-[release status](RELEASE-STATUS.md). Wait for a verified replacement before
-installing a native server. Intel macOS, Linux, Windows and remote desktop
-acceptance remain pending. Registry installation awaits human submission and
-maintainer merge. Automatic server downloads remain disabled.
+Zed adapter **0.1.4** pins corrected native LSP **0.1.2** for macOS ARM64.
+LSP 0.1.0 and 0.1.1 are withdrawn; see [release status](RELEASE-STATUS.md).
+Other platforms and registry installation remain pending.
 
 ## Install the public source locally
 
 ```sh
-git clone --branch v0.1.3 https://github.com/AxiomCore/acore-zed.git
+git clone --branch v0.1.4 https://github.com/AxiomCore/acore-zed.git
 cd acore-zed
 rustup toolchain install 1.93.0 --profile minimal
 rustup target add wasm32-wasip2 --toolchain 1.93.0
@@ -25,10 +22,25 @@ license the native compiler or optional CLI.
 
 ## Install and select the native server
 
-Native downloads are temporarily unavailable while a corrected release is
-prepared. Do not reuse the withdrawn 0.1.0 or 0.1.1 archives, even if their old
-checksums match. Replacement instructions will include the exact version,
-checksums, compatibility metadata and acceptance scope.
+Automatic installation downloads the immutable 0.1.2 macOS ARM64 executable
+when no explicit path or PATH server is selected. It verifies SHA-256, size and
+protocol/compiler metadata before activating the cache. A stale or corrupt cache
+is rejected; a failed download does not restore a withdrawn version.
+
+For a manual or offline installation, obtain these assets from the
+[0.1.2 release](https://github.com/AxiomCore/AxiomCore/releases/tag/acore-lsp-v0.1.2):
+`acore-lsp-macos-arm64.zip`, `acore-lsp-release.json` and `SHA256SUMS`. Verify the
+ZIP against SHA256SUMS, extract into a new directory, and verify the executable
+against `native.sha256` in the release manifest. Its SHA-256 must be
+`911c7da384b2ea9b60be7171e218b6bdfabdd2b90073ab1cc1f4a891d7324030`.
+Keep NATIVE-NOTICE.txt and third-party-notices with the executable. Run
+`./acore-lsp --version-json`; the server version must be `acore/0.1.2 (E7)` and
+the compiler identity must match the release manifest. An old archive is unsafe
+even when its historical checksum matches.
+
+Ad-hoc signing is verified on the acceptance host. Developer ID notarization and
+recipient-machine Gatekeeper acceptance are not certified. Obtain an approved
+signed build if required by your system; do not bypass operating-system checks.
 
 Set an absolute executable path in Zed user settings:
 
@@ -44,8 +56,7 @@ Run **editor: restart language server** after changing it. An explicit path take
 precedence over PATH. Verify that the intended process/version is selected; an
 old executable can still speak the protocol while lacking the new features.
 Core editing needs no CLI. Explicit tasks require a separately supplied CLI with
-the same `compilerVersion`; use the private validated CLI until a matching CLI
-release is available. See [WORKFLOWS.md](WORKFLOWS.md).
+the same `compilerVersion`; use the matching public CLI 0.148.1 release. See [WORKFLOWS.md](WORKFLOWS.md).
 
 ## Check the installed editor
 

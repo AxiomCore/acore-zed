@@ -85,7 +85,7 @@ impl ReleasePins {
         for release in &pins.releases {
             if !token(&release.id)
                 || !ids.insert(&release.id)
-                || !release.server_version.starts_with("acore/")
+                || !crate::server::supported_version(&release.server_version)
                 || release.server_version.len() <= 6
                 || release.protocol_version != "axiom-editor/v1"
                 || !digest(&release.compiler_version)
@@ -107,6 +107,7 @@ impl ReleasePins {
                 ) || !platforms.insert(&asset.platform)
                     || !asset_url(&asset.url)
                     || !digest(&asset.sha256)
+                    || crate::server::WITHDRAWN_SHA256.contains(&asset.sha256.as_str())
                     || asset.size == 0
                     || asset.size > MAX_ASSET_BYTES
                 {

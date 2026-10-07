@@ -7,12 +7,13 @@ objects; the shared compiler supplies types and validated edits.
 
 **Accepted host:** Apple Silicon macOS 26.2 with Zed 1.22.0. Linux, Windows,
 remote execution and physical Intel macOS acceptance remain pending. The native
-server and optional CLI have separate distribution and licensing. Native LSP
-0.1.0 and 0.1.1 downloads are withdrawn pending a verified replacement; see
-[release status](docs/RELEASE-STATUS.md). Do not install or redistribute those
-versions. Automatic native downloads remain disabled. Registry publication
-awaits a human-submitted PR and maintainer merge. The public source can be
-installed as a dev extension now.
+server and optional CLI have separate distribution and licensing. Adapter 0.1.4
+pins the corrected macOS ARM64 Acore LSP 0.1.2. Native versions 0.1.0 and 0.1.1
+are withdrawn; do not install, redistribute or use them for rollback. See
+[release status](docs/RELEASE-STATUS.md). Automatic installation verifies the
+immutable 0.1.2 executable's checksum and metadata. Registry installation awaits
+human submission and maintainer merge; this Git source can be installed as a dev
+extension.
 
 ## Install and try it
 
