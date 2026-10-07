@@ -2,7 +2,7 @@
 
 Updated: 7 October 2026.
 
-Acore LSP **0.1.2** is the corrected macOS ARM64 server. Zed adapter **0.1.4**
+Acore LSP **0.1.2** is the corrected macOS ARM64 server. Zed adapter **0.1.5**
 pins that exact executable and refuses withdrawn versions. The compatible CLI is
 **0.148.1**. See [installation and verification](INSTALL.md).
 

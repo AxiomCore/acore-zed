@@ -1,13 +1,13 @@
 # Install Acore for Zed
 
-Zed adapter **0.1.4** pins corrected native LSP **0.1.2** for macOS ARM64.
+Zed adapter **0.1.5** pins corrected native LSP **0.1.2** for macOS ARM64.
 LSP 0.1.0 and 0.1.1 are withdrawn; see [release status](RELEASE-STATUS.md).
 Other platforms and registry installation remain pending.
 
 ## Install the public source locally
 
 ```sh
-git clone --branch v0.1.4 https://github.com/AxiomCore/acore-zed.git
+git clone --branch v0.1.5 https://github.com/AxiomCore/acore-zed.git
 cd acore-zed
 rustup toolchain install 1.93.0 --profile minimal
 rustup target add wasm32-wasip2 --toolchain 1.93.0

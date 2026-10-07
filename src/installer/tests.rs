@@ -307,3 +307,14 @@ fn withdrawn_versions_and_native_digests_cannot_be_restored_as_valid_pins() {
         assert!(ReleasePins::parse(&value.to_string()).is_err());
     }
 }
+
+#[test]
+fn shipped_manifest_parses_and_pins_corrected_macos_server() {
+    let pins = ReleasePins::parse(PINS).unwrap();
+    let (release, asset) = pins.selected("macos-aarch64").unwrap();
+    assert_eq!(release.id, "acore-lsp-v0.1.2");
+    assert_eq!(asset.sha256, "911c7da384b2ea9b60be7171e218b6bdfabdd2b90073ab1cc1f4a891d7324030");
+    assert!(!token("."));
+    assert!(!token(".."));
+    assert!(!token("../escape"));
+}

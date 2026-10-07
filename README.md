@@ -7,7 +7,7 @@ objects; the shared compiler supplies types and validated edits.
 
 **Accepted host:** Apple Silicon macOS 26.2 with Zed 1.22.0. Linux, Windows,
 remote execution and physical Intel macOS acceptance remain pending. The native
-server and optional CLI have separate distribution and licensing. Adapter 0.1.4
+server and optional CLI have separate distribution and licensing. Adapter 0.1.5
 pins the corrected macOS ARM64 Acore LSP 0.1.2. Native versions 0.1.0 and 0.1.1
 are withdrawn; do not install, redistribute or use them for rollback. See
 [release status](docs/RELEASE-STATUS.md). Automatic installation verifies the

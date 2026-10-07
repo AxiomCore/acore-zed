@@ -51,10 +51,11 @@ fn digest(value: &str) -> bool {
 
 fn token(value: &str) -> bool {
     !value.is_empty()
+        && !matches!(value, "." | "..")
         && value.len() <= 100
         && value
             .bytes()
-            .all(|c| c.is_ascii_alphanumeric() || b"-_".contains(&c))
+            .all(|c| c.is_ascii_alphanumeric() || b"-_.".contains(&c))
 }
 
 fn asset_url(url: &str) -> bool {
