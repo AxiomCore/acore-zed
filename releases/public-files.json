@@ -1,7 +1,5 @@
 {
   "acore-zed": [
-    ".github/workflows/platform-source-checks.yml",
-    ".github/workflows/public-checks.yml",
     ".gitignore",
     "CHANGELOG.md",
     "Cargo.lock",
@@ -70,7 +68,10 @@
     "templates/foreign-tasks.json",
     "templates/tooling-tasks.json",
     "templates/workflow-tasks.json",
-    "tests/test_release_tools.py"
+    "tests/test_release_tools.py",
+    "validation/README.md",
+    "validation/former-github-actions/platform-source-checks.yml",
+    "validation/former-github-actions/public-checks.yml"
   ],
   "tree-sitter-acore": [
     ".gitignore",
